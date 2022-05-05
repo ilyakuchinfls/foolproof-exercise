@@ -1,0 +1,131 @@
+<style>
+  table {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .spinner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+<mat-tab-group dynamicHeight>
+  <mat-tab label="Users">
+    <table
+      *ngIf="users.length > 0; else loading"
+      mat-table
+      [dataSource]="users"
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="givenName">
+        <th mat-header-cell *matHeaderCellDef>Given Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.givenName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="familyName">
+        <th mat-header-cell *matHeaderCellDef>Family Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.familyName }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsUsers"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsUsers"></tr>
+    </table>
+  </mat-tab>
+  <mat-tab label="Files">
+    <table
+      *ngIf="files.length > 0 && !isUsersLoading; else loading"
+      mat-table
+      [dataSource]="files"
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">{{ element.status }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="modifiedBy">
+        <th mat-header-cell *matHeaderCellDef>Modified By</th>
+        <td mat-cell *matCellDef="let element">{{ element.modifiedBy }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Type</th>
+        <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="scheduled">
+        <th mat-header-cell *matHeaderCellDef>Scheduled</th>
+        <td mat-cell *matCellDef="let element">{{ element.scheduled }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdBy">
+        <th mat-header-cell *matHeaderCellDef>Created By</th>
+        <td mat-cell *matCellDef="let element">{{ element.createdBy }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsFiles"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsFiles"></tr>
+    </table>
+  </mat-tab>
+  <mat-tab label="Types">
+    <table
+      *ngIf="types.length > 0; else loading"
+      mat-table
+      [dataSource]="types"
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="creationDateTime">
+        <th mat-header-cell *matHeaderCellDef>Creation DateTime</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.creationDateTime }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="documentsCount">
+        <th mat-header-cell *matHeaderCellDef>Documents Count</th>
+        <td mat-cell *matCellDef="let element">{{ element.documentsCount }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="colourId">
+        <th mat-header-cell *matHeaderCellDef>Colour ID</th>
+        <td mat-cell *matCellDef="let element">{{ element.colourId }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsTypes"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsTypes"></tr>
+    </table>
+  </mat-tab>
+</mat-tab-group>
+
+<ng-template #loading>
+  <div class="spinner"><mat-spinner></mat-spinner></div>
+</ng-template>
